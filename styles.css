@@ -1,0 +1,155 @@
+:root {
+    --bg:       #0a0a0f:
+    --surface:  #13131a;
+    --card-bg:  #1a1a26;
+    --accent:   #e8c14d;
+    --text:     #e8e6e0;
+    --muted:    #7a7880;
+    --radius:   12px;
+}
+/* ══════════════════════════════════════════
+   RESET Y BASE
+══════════════════════════════════════════ */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+ 
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  min-height: 100vh;
+}
+
+/* ══════════════════════════════════════════
+  HEADER
+══════════════════════════════════════════ */
+
+header{
+    background: linear-gradient(180deg, #000 0%, transparent 100%);
+    padding: 2.5rem 0 1.5rem;
+    text-align: center;
+    position: relative;
+}
+
+/*efecto luz del logo*/
+header::before{
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellip´se at 50% 0%, rgba(232,193,77,0.12) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+/*nombre de la app*/
+.brand{
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size:  clamp(2.8rem, 8vw, 5rem); /*tamaño responsive*/
+    letter-spacing:  0.06em;
+    color: var(--accent);
+    line-height: 1;
+    text-shadow: 0 0 40px rgba(232,193,77,0.3);
+}
+.brand span{
+    color: var(--text);
+}
+.tagline{
+    color: var(--muted);
+    font-size: 0.85rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-top: 0.4rem;
+}
+/*Barra de busqueda*/
+.search-wrapper {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  position: relative;
+}
+ 
+.search-input {
+  width: 100%;
+  background: var(--surface);
+  border: 1.5px solid rgba(232,193,77,0.25);
+  border-radius: 50px;
+  padding: 0.9rem 1.4rem;
+  padding-right: 3.5rem;
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+ 
+.search-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(232,193,77,0.12);
+}
+ 
+.search-input::placeholder {
+  color: var(--muted);
+}
+ 
+.search-btn {
+  position: absolute;
+  right: 1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--accent);
+  cursor: pointer;
+  font-size: 1.2rem;
+  padding: 0.3rem;
+  transition: transform 0.2s;
+}
+ 
+.search-btn:hover {
+  transform: translateY(-50%) scale(1.15);
+}
+
+/*MAIN*/
+main {
+  padding: 0 1.5rem 4rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+ 
+/* Estado inicial (pantalla vacía) */
+.hero-state {
+  text-align: center;
+  padding: 3rem 0 5rem;
+  animation: fadeIn 0.5s ease;
+}
+ 
+.hero-icon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  opacity: 0.3;
+}
+ 
+.hero-state h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.8rem;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+}
+ 
+/* Título de sección encima de los resultados */
+.section-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.4rem;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+ 
+.section-title span {
+  color: var(--accent);
+}
+ 

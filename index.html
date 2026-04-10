@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="witdh=device-width, initial-scale=1.0" />
+        <title> CineSearch - Buscador de series y Peliculas</title>
+        <!--agregar boostrap-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+        <!--Agregar fuentes de google-->
+        <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+        <!--nuestro propio CSS-->
+        <link rel="stylesheet" href="styles.css">
+    </head>
+<body>
+    <!--header barra busqueda // logos-->
+    <header>
+        <div class="brand">Cine <span>Busqueda</span></div>
+        <p class="tagline">Tú buscador de series & shows</p>
+
+        <div class="search-wrapper">
+            <input 
+            type="text"
+            id="searchInput"
+            class="search-input"
+            placeholder="Buscas Serie o Pelicula... ej: Fragmentado"
+            autocomplete="off"
+            />
+            <button class="search-btn" id="searchBtn" title="Buscar"> 🔍  Buscar 🔍</button>
+
+        </div>
+    </header>
+<!--MAIN: area donde aparecen los resultados-->
+<main>
+<!-- estado inicial (se oculta al buscar)-->
+ <div class="hero-state" id="heroState">
+    <div class="hero-icon">🎬</div>
+    <h2>Busca tú serie favorita</h2>
+ </div>
+
+ <!--spinner de carga (se muestra mientras esperamos la respuesta de la API)-->
+ <div class="loader d-none" id="loader">
+    <div class="spinner"></div>
+    Buscando en la API...
+ </div>
+
+ <!--Mensaje de error (aparece solo si algo falla)-->
+ <div class="error-msg d-none" id="errorMsg"></div>
+
+<!--inyectar las cards con JS-->
+<div id="results"></div>
+</main>
+
+<!--MODAL : ventana emergente de detalle -->
+<div class="modal fade" id="showModal" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="modal-title" id="modalLabel">Detalle</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+
+        <!-- contenido que se genera  dinamicamente con JS-->
+        <div class="modal-body" id="modalBody"></div>
+        <div class="modal-footer" id="modalFooter"></div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="app.js"></script>
+
+</body>
+
+</html>

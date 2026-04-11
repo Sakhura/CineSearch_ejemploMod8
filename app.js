@@ -108,5 +108,86 @@ async function verDetalle(showId) {
     </div>`;
     modalFooter.innerHTML= '';
     modal.show();
+
+    try{
     
+    // segunda llamada, id
+    const response = await fetch(`${API_BASE}/shows/${showId}`);
+    const show = await response.json();
+
+    const poster = show.image?.original || show.image?.medium || null;
+
+    const summary = show.summary
+        ? show.summary.replace(/<[^>]+>/g, '')
+        : 'Sin descripción disponible'
+
+        const generos = show.genres?.map(g =>
+            `<span class="badge-genre">${g}</span>`
+        ).json(' ') || '';
+
+        //actualizar el titulo del modal
+        document.getElementById('modalLabel').textContent = show.name;
+
+        //insertar  el HTML del detalle en el modal
+        modalBody.innerHTML =`
+         <div class="d-flex gap-3 flex-wrap">
+ 
+        <div class="modal-poster" style="aspect-ratio:2/3; min-height:200px;">
+          ${poster
+            ? `<img src="${poster}" alt="${show.name}"/>`
+            : `<div class="no-poster" style="height:200px;"><span>🎬</span></div>`
+          }
+        </div>
+ 
+        <div class="flex-grow-1">
+          <div class="modal-title-text">${show.name}</div>
+          <div class="d-flex gap-1 flex-wrap mt-2">${generos}</div>
+ 
+          <div class="info-row mt-3">
+            <div class="info-item">
+              <strong>Estado</strong>${show.status || '–'}
+            </div>
+            <div class="info-item">
+              <strong>Idioma</strong>${show.language || '–'}
+            </div>
+            <div class="info-item">
+              <strong>Estreno</strong>${show.premiered || '–'}
+            </div>
+            <div class="info-item">
+              <strong>Rating</strong>
+              ${show.rating?.average ? `⭐ ${show.rating.average}` : '–'}
+            </div>
+          </div>
+ 
+          <p class="summary-text mt-2">${summary}</p>
+        </div>
+ 
+      </div>
+        `;
+
+    modalFooter.innerHTML = show.officialSite
+            ? `<a href="${show.officialSite}" target="_blank" class="modal-link-btn">Sitio oficial →</a>`
+      : `<span style="color:var(--muted);font-size:0.82rem;">Sin sitio oficial disponible</span>`;
+
+        }catch(err){
+            modalBody.innerHTML = `<p class="error-msg">No se pudo cargar el detalle.</p>`;
+        }
 }
+
+// 6.- funcion para capturar errores
+function mostrarError(msg){
+    errorMsg.textContent = msg;
+    errorMsg.classList.remove('d-none');
+}
+
+// 7. Eventos, escuchar las acciones del usuario
+
+searchBtn.addEventListener('click', () => {
+    buscarSeries(searchInput.value);
+});
+
+searchInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter'){
+        buscarSeries(searchInput.value);
+    }
+});
